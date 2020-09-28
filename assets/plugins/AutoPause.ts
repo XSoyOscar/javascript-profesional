@@ -1,4 +1,11 @@
+import MediaPlayer from "../MediaPlayer";
+
 class AutoPause {
+    private threshold: number;
+    private player: MediaPlayer;
+    private pausedByScroll: boolean;
+    private pausedByVisibility: boolean;
+
     constructor() {
         this.threshold = 0.25;
         //Importante, la siguiente linea se puso para decirle que el this
@@ -23,7 +30,7 @@ class AutoPause {
 
     }
 
-    handlerIntersection(entries) {
+    private handlerIntersection(entries: IntersectionObserverEntry[]) {
         const entry = entries[0];
 
         // const isVisible = entry.intersectionRatio >= this.threshold
@@ -42,7 +49,7 @@ class AutoPause {
 
     }
 
-    handlerVisibilityChange() {
+    private handlerVisibilityChange() {
         const isVisible = document.visibilityState === "visible"
 
         if (isVisible) {
